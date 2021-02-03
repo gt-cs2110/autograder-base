@@ -12,11 +12,11 @@ def open_config():
 	        print(exc)
 
 def print_passed(name):
-	print '\nTEST: %-45s %-15s\n' % (name, "PASSED")
+	print('\nTEST: %-45s %-15s\n' % (name, "PASSED"))
 
 def print_failed(name, reason):
-	print '\nTEST: %-45s %-15s\n' % (name, "FAILED")
-	print '\n%20s\n' % (reason)
+	print('\nTEST: %-45s %-15s\n' % (name, "FAILED"))
+	print('\n%20s\n' % (reason))
 
 def main():
 
