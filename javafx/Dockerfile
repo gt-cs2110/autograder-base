@@ -1,4 +1,4 @@
-FROM gtcs2110/autograder-base:1.5.2
+FROM gtcs2110/autograder-base:1.5.3
 
 # Install Java 8 with JavaFX from Zulu along with dummy X server
 RUN apt-get update \
