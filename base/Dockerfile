@@ -1,6 +1,6 @@
 FROM gradescope/auto-builds:ubuntu-20.04
 
-ENV CS2110_AUTOGRADER_VERSION 1.5.3
+ENV CS2110_AUTOGRADER_VERSION 1.5.2
 
 ENV AUTOGRADER_ROOT=/autograder \
     DEBIAN_FRONTEND=noninteractive
