@@ -1,7 +1,6 @@
 #!/bin/bash
-set -e
-set -o pipefail
+set -euo pipefail
 
 cd /autograder/source
 zucc grade-submission /autograder/submission \
-    | python print_grades.py
+    | zucc local print
