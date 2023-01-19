@@ -1,6 +1,6 @@
-FROM gradescope/auto-builds:ubuntu-20.04
+FROM gradescope/auto-builds:ubuntu-22.04
 
-ENV CS2110_AUTOGRADER_VERSION 1.8.0
+ENV CS2110_AUTOGRADER_VERSION 1.9.0
 
 ENV AUTOGRADER_ROOT=/autograder \
     DEBIAN_FRONTEND=noninteractive
@@ -9,8 +9,8 @@ ADD ./run_autograder $AUTOGRADER_ROOT/
 
 ### Install zucchini and its dependencies
 RUN apt-get update && \
-    apt-get install -y python3 python-is-python3 python3-pip cmake build-essential g++ castxml && \
-    pip3 install zucchini==2.0.10
+    apt-get install -y python3 python-is-python3 python3-pip cmake build-essential g++ castxml tmux && \
+    pip3 install zucchini==2.1.1
 
 RUN cd $AUTOGRADER_ROOT && mkdir source && mkdir results
 

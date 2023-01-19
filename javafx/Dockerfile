@@ -1,4 +1,4 @@
-FROM gtcs2110/autograder-base:1.8.0
+FROM gtcs2110/autograder-base:1.9.0
 
 # Install OpenJDK 17 with JavaFX along with dummy X server
 RUN apt-get update \
