@@ -1,3 +1,3 @@
-FROM gtcs2110/autograder-base:1.11.0
+FROM gtcs2110/autograder-base:1.11.1
 
 RUN pip3 install lc3-ensemble-test[std]
