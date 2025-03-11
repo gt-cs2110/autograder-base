@@ -1,4 +1,4 @@
-FROM gtcs2110/autograder-base:1.11.1
+FROM gtcs2110/autograder-base:1.11.2
 
 COPY build build
 RUN chmod +x ./build/install-criterion.sh

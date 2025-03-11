@@ -1,6 +1,6 @@
-FROM gtcs2110/autograder-base:1.11.1
+FROM gtcs2110/autograder-base:1.11.2
 
-# Install OpenJDK 17 along with dummy X server
+# Install OpenJDK 21 along with dummy X server
 #
 # Despite this Docker container being called "autograder-base-javafx",
 # It doesn't install JFX. (It's okay, the wrong JavaFX was being installed anyway).
