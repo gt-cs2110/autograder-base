@@ -1,4 +1,4 @@
-FROM gtcs2110/autograder-base:1.11.3
+FROM gtcs2110/autograder-base:1.11.4
 
 # Install OpenJDK 21 along with dummy X server
 #
