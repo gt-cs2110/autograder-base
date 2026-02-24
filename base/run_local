@@ -2,5 +2,4 @@
 set -euo pipefail
 
 cd /autograder/source
-zucc grade-submission /autograder/submission \
-    | zucc local print
+zucc grade | zucc export --format=local

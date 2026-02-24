@@ -4,6 +4,4 @@ set -e
 set -o pipefail
 
 cd /autograder/source
-zucc grade-submission /autograder/submission \
-    | zucc gradescope bridge /autograder/submission_metadata.json \
-    > /autograder/results/results.json
+zucc grade | zucc export --format=gradescope -o /autograder/results/results.json
