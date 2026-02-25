@@ -41,6 +41,7 @@ jobs:
           load: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: IMAGE_VERSION=${{ steps.meta.outputs.version }}
 
       - name: Test Docker image
         env:
