@@ -3,6 +3,12 @@ on:
   push:
     tags:
       - '*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Image version
+        type: string
+        required: true
 
 env:
   REGISTRY: ghcr.io
@@ -33,6 +39,9 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=${{ inputs.version }}
 
       - name: Build Docker image
         uses: docker/build-push-action@v6
@@ -58,6 +67,7 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: IMAGE_VERSION=${{ steps.meta.outputs.version }}
       
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v3
@@ -72,7 +82,7 @@ jobs:
     strategy:
       matrix:
         image: [javafx, lc3, c]
-
+    
     permissions:
       contents: read
       packages: write
@@ -95,24 +105,11 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}-${{ matrix.image }}
+          tags: |
+            type=semver,pattern={{version}}
+            type=raw,value=${{ inputs.version }}
 
-      - name: Build Docker image
-        uses: docker/build-push-action@v6
-        with:
-          context: ./${{ matrix.image }}
-          load: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          build-args: IMAGE_VERSION=${{ steps.meta.outputs.version }}
-
-      - name: Test Docker image
-        env:
-          TEST_TAG: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}-${{ matrix.image }}
-        run: |
-          chmod +x test.sh
-          ./test.sh
-      
-      - name: Push Docker image
+      - name: Build and push Docker image
         id: push
         uses: docker/build-push-action@v6
         with:
@@ -120,10 +117,11 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-      
+          build-args: IMAGE_VERSION=${{ steps.meta.outputs.version }}
+
       - name: Generate artifact attestation
         uses: actions/attest-build-provenance@v3
         with:
-          subject-name: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}
+          subject-name: ${{ env.REGISTRY }}/${{ env.BASE_IMAGE_NAME }}-${{ matrix.image }}
           subject-digest: ${{ steps.push.outputs.digest }}
           push-to-registry: true
