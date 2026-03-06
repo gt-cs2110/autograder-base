@@ -26,7 +26,7 @@ mkdir "$SOURCE_DIR/grading-files"
 docker run --platform linux/amd64 --rm -v "$SOURCE_DIR:/autograder/source" -v "$RESULTS_DIR:/autograder/results" --entrypoint /autograder/run_autograder "$TEST_TAG" \
     && [ "$(jq '.score' "$RESULTS_DIR/results.json")" = 100.0 ]
 
-cat "$RESULTS_DIR/results.json"
+jq . "$RESULTS_DIR/results.json"
 RESULT=$?
 
 if [ ! -z "$ROOT_DIR" ]; then
