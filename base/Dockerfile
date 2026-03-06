@@ -12,7 +12,7 @@ ADD ./run_autograder $AUTOGRADER_ROOT/
 ### Install zucchini and its dependencies
 RUN apt-get update && \
     apt-get install -y python3 python-is-python3 python3-pip cmake build-essential g++ castxml tmux
-RUN pip3 install zucchini==3.0.2
+RUN pip3 install zucchini==3.0.3
 
 RUN cd $AUTOGRADER_ROOT && mkdir source && mkdir results
 
